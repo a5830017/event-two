@@ -1,0 +1,165 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'event/detailbg.css' %}" />
+
+<link rel="stylesheet" type="text/css" href="{% static 'event/navbar.css' %}" />
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'event/css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>Event Detail</title>
+
+</head>
+
+<style>
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.buttonRed {
+    background-color: white;
+    color: red;
+
+}
+.buttonRed:hover {
+    background-color: #b30000;
+    color: white;
+}
+
+.buttonBlack {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+.buttonBlack:hover {
+    background-color: #555555;
+    color: white;
+}
+
+.boxBlue {
+	display: inline-block;
+    margin: 4px 2px;
+    padding: 40px 40px;
+    border: solid #0000ff;
+    background-color: rgba(77, 210, 255, 0.5);
+
+}
+
+.boxYellow {
+	display: inline-block;
+    margin: 4px 2px;
+    padding: 40px 40px;
+    border: dotted #0000ff;
+    background-color: rgba(255, 255, 153, 0.5);
+
+}
+
+input[type=text] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: rgba(230, 255, 255, 0.5);
+    color: black;
+}
+strong{color: rgb(0, 0, 153);}
+
+</style>
+
+<ul>
+  <li><a href="/"><< Home</a></li>
+  <li style="float:right"><a href="../about">About</a>
+</ul>
+
+    <body>
+
+    <div class="container">
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="text-center">
+
+            <h1>{{event.event_name}}</h1>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+    <div class="boxBlue" >
+    <font size="5">
+        <strong>Detail :</strong> {{event.event_detail|linebreaks}}<br>
+        <strong>Location :</strong> {{event.event_location}}<br>
+        <strong>Start at :</strong> {{event.event_numset}} person<br>
+        <strong>Total register :</strong> {{event.pcount}}
+        </font>
+
+        </div>
+         </div>
+
+        </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+        <h3>Person register list</h3>
+        <table class="table table-hover">
+
+        {% if event.person_set.all %}
+            {% for person in event.person_set.all %}
+            <tr>
+
+                <form action="{% url 'event:del' event.id %}" method="POST">
+                {% csrf_token %}
+
+                <td>{{ forloop.counter }}: {{ person.fname }} - {{ person.lname }}</td>
+                <td><button class="button buttonRed" type="submit" name="del_btn" value="{{ person.id }}">Delete {{ forloop.counter }}</button></a></td>
+
+                </br>
+                </form>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <p>No anyone register</p>
+        {% endif %}
+        </td></tr>
+       </table>
+         </div>
+         </div>
+         </div>
+
+        <h2 style="display:block; padding:20px " >Register</h2>
+        <form action="{% url 'event:event_detail' event.id %}" method="POST" style="display:block; padding:20px ">
+            {% csrf_token %}
+            <font size="3">
+            First Name : <input type="text" name="firstname" id="id_firstname" placeholder="Your first name" /> -
+            Last Name : <input type="text" name="lastname" id="id_lastname" placeholder="Your last name" /></br>
+            </font>
+            <input class="btn btn-success" type="submit" value="Submit" id="id_submit" />
+        </form>
+  <div class="container">
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+        </div>
+</div>
+</div>
+
+
+
+    </body>
+</html>

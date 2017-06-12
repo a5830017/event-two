@@ -1,0 +1,144 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'event/homebg.css' %}" />
+
+<link rel="stylesheet" type="text/css" href="{% static 'event/tablehyperlink.css' %}" />
+
+<link rel="stylesheet" type="text/css" href="{% static 'event/navbar.css' %}" />
+
+
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="/home/ab5830017/superevent/static/event/css/bootstrap.min.css/" rel="stylesheet">-->
+    <link href="{% static 'event/css/bootstrap.min.css' %}" rel="stylesheet">
+        <title>Event Start</title>
+</head>
+
+
+<style>
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+    text-align: center;
+}
+
+h1 {
+  background-color: rgba(255, 255, 0, 0.5);
+  color: black;
+}
+
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.buttonBlack {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+.buttonBlack:hover {
+    background-color: #555555;
+    color: white;
+}
+/* unvisited link */
+a:link {
+    color: blue;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+}
+
+/* mouse over link */
+a:hover {
+    color: white;
+}
+
+/* selected link */
+a:active {
+    color: green;
+}
+
+</style>
+
+<ul>
+  <li><a href="">Home</a></li>
+  <li><a href="new_event">Start new Event</a></li>
+
+  <li style="float:right"><a href="about">About</a>
+</ul>
+
+
+    <body>
+            <div class="container">
+            <div class="text-center">
+
+
+            <h1>Event</h1>
+            </div>
+            </div>
+
+
+
+        <div style="text-align:center">
+        <a class="button buttonBlack" href="new_event">Start new Event</a>
+        </div>
+        <br>
+        <br>
+
+
+
+
+        <table class="table table-inverse table-hover">
+  <thead class="alert alert-info">
+  {% if event_list %}
+    <tr>
+      <th>#</th>
+      <th>Event</th>
+      <th>Count / at least</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for event in event_list %}
+    <tr class='alert alert-success'>
+
+
+      <td scope="row">{{ forloop.counter }}</td>
+      <td><a href="{{ event.id }}/">{{ event.event_name }}</a></td>
+      <td>{{ event.pcount }} / {{ event.event_numset }}</td>
+    </tr>
+    {% endfor %}
+
+    {% else %}
+
+    <div class="alert alert-danger" role="alert">
+  <strong>Sorry no event!</strong>
+  <a href="new_event" class="alert-link">Create new here</a>.
+</div>
+
+    {% endif %}
+  </tbody>
+</table>
+
+    </body>
+</html>

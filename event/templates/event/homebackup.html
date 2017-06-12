@@ -1,0 +1,116 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'event/homebg.css' %}" />
+
+<link rel="stylesheet" type="text/css" href="{% static 'event/navi.css' %}" />
+
+<html>
+<style>
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.buttonBlack {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+.buttonBlack:hover {
+    background-color: #555555;
+    color: white;
+}
+/* unvisited link */
+a:link {
+    color: blue;
+}
+
+/* visited link */
+a:visited {
+    color: black;
+}
+
+/* mouse over link */
+a:hover {
+    color: red;
+}
+
+/* selected link */
+a:active {
+    color: green;
+}
+
+#banner {
+  
+  margin: 0 auto;
+  padding: 0;
+  background-color: rgba(128, 223, 255, 0.3);
+}
+
+#banner h1 {
+  margin: 0;
+  padding: 25px;
+  color: #800033;
+}
+
+</style>
+
+    <head>
+        <title>Event Start</title>
+    </head>
+    <body>
+        <div id="banner">
+        <h1 style= "text-align:center;">Event</h1>
+        </div>
+        <br>
+        <div style="text-align:center">  
+        <a class="button buttonBlack" href="new_event">Start new Event</a>
+        </div>
+        <br>
+        <br>
+        <table style="text-align:center;" align="center">
+        <tr>
+    <th bgcolor="#ccff66">Event ID</th>
+    <th bgcolor="#ccff66">Event</th>
+    <th bgcolor="#ccff66">Count</th>
+  </tr>
+        {% if event_list %}
+            
+                {% for event in event_list %}
+                <tr>
+                    <td bgcolor="#ffffcc"> {{ event.id }} </td>
+                    <td bgcolor="#ffffcc"><a href="{{ event.id }}/">{{ event.event_name }}</a></td> <td bgcolor="#ffffcc">{{ event.pcount }} / {{ event.event_numset }}</td>
+                </tr>
+                {% endfor %}
+            
+        {% else %}
+        <tr><td bgcolor="#ffffcc">
+            <p>Sorry no event</p>
+            </td></tr>
+        {% endif %}
+        </table>
+
+        <form action="{% url 'event:del_event' %}" method="POST">
+        Delete Event by ID <br>
+        <input type="password" name="pw" id="id_pw"/>Password
+        <input type="number" name="numdel" id="id_numdel"/>ID
+        <input type="submit" value="Submit" id="id_submit" />
+        {% csrf_token %}
+        </form>
+    </body>
+</html>        

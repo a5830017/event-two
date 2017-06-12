@@ -1,0 +1,59 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'event/detailbg.css' %}" />
+
+<link rel="stylesheet" type="text/css" href="{% static 'event/navbar.css' %}" />
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'event/css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>Event Detail</title>
+
+</head>
+    <body>
+
+    <ul>
+  <li><a href="/"><< Home</a></li>
+
+  <li style="float:right"><a href="about">About</a>
+</ul>
+
+        <h1 style="text-align: center">Create</h1>
+
+        <form action="{% url 'event:new_event' %}" method="POST">
+            <div class="container">
+            {% if error_msg %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ error_msg }}</strong>
+            </div>
+            {% endif %}
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">Event Name</span>
+                <input type="text" class="form-control" name="name" id="id_name" placeholder="Event name" aria-describedby="sizing-addon1">
+            </div>
+
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">Detail</span>
+                <textarea type="text" class="form-control" name="detail" id="id_detail" placeholder="Event detail" cols="40" rows="5" style="width:1000px; height:200px;" Event Location" aria-describedby="sizing-addon1"/></textarea>
+            </div>
+
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">Location</span>
+                <input type="text" class="form-control" name="location" id="id_location" placeholder="Event Location" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">Limit for start</span>
+                <input type="number" class="form-control" type="number" name="numset" id="id_numset" value="0" aria-describedby="sizing-addon1">
+            </div>
+
+            <br><input type="submit" value="Submit" id="id_submit" />
+            {% csrf_token %}
+
+            </div>
+        </form>
+    </body>
+</html>
