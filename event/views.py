@@ -65,7 +65,8 @@ def delete_event(request):
 
         else:
             pass
-    return HttpResponseRedirect(reverse('event:homeadmin',))
+           #return HttpResponseRedirect(reverse('event:adminhome',))
+    return HttpResponseRedirect('/adminhome')
 
     '''password = "delete"
     if request.method == 'POST':
@@ -95,7 +96,7 @@ def delete_event(request):
             pass
     return HttpResponseRedirect(reverse('event:home',))'''
 def login_page(request):
-    return render(request, 'login.html','')
+    return render(request, 'event/login.html','')
 
 
 
