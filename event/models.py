@@ -9,6 +9,9 @@ class Event(models.Model):
     pcount = models.IntegerField(default=0) #person count
     #date = models.DateTimeField(default=timezone.now())#'date published')YYYY-MM-DD HH:MM
 
+    def __str__(self):
+        return self.event_name
+
 class Person(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, default=1)
     fname = models.TextField(default='') #first name
